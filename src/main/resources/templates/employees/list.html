@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="/accueil" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>employees</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Gender</th>
+            <th>Country</th>
+            <th>City</th>
+            <th>Adress</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="employee:${employees}">
+            <td th:text="${employee.id}"></td>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.country}"></td>
+            <td th:text="${employee.city}"></td>
+            <td th:text="${employee.adress}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${employees.totalPages > 0}" class="pagination"
+         th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/allemployees(size=${employees.size}, page=${pageNumber})}"
+           th:text=${pageNumber}
+           th:class="${pageNumber==employees.number + 1} ? active"></a>
+    </div>
+</div>
+</body>
+</html>

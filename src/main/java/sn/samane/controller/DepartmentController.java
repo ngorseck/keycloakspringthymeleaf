@@ -1,0 +1,45 @@
+package sn.samane.controller;
+
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import sn.samane.domain.Department;
+import sn.samane.service.DepartmentService;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@RestController
+@RequestMapping("departments")
+@AllArgsConstructor
+public class DepartmentController {
+
+    DepartmentService departmentService;
+
+    @GetMapping
+    public List<Department> getDepartments() {
+        return departmentService.getDepartments();
+    }
+
+    @GetMapping("{name}")
+    public Department getDepartment(@PathVariable("name") String name) {
+        return departmentService.getDepartment(name);
+    }
+
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Department createDepartment(@Valid @RequestBody Department department) {
+        return departmentService.createDepartment(department);
+    }
+
+    @PutMapping("{name}")
+    public Department updateDepartment(@PathVariable("name") String name, @Valid @RequestBody Department department) {
+        return departmentService.updateDepartment(name, department);
+    }
+
+    @DeleteMapping("{name}")
+    public void deleteDepartment(@PathVariable("name") String name) {
+        departmentService.deleteDepartment(name);
+    }
+
+}

@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: postgres:9.6
+    container_name: spring-thymeleaf-postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  keycloak:
+    image: bitnami/keycloak:18.0.0-debian-11-r0
+    container_name: spring-thymeleaf-keycloak
+    environment:
+      KEYCLOAK_DATABASE_HOST: postgres
+      KEYCLOAK_DATABASE_NAME: keycloak
+      KEYCLOAK_DATABASE_USER: keycloak
+      KEYCLOAK_DATABASE_SCHEMA: public
+      KEYCLOAK_DATABASE_PASSWORD: password
+      KEYCLOAK_ADMIN_USER: admin
+      KEYCLOAK_ADMIN_PASSWORD: password
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres
+
+  redis:
+    image: redis:5.0.3-alpine
+    container_name: spring-thymeleaf-redis
+    ports:
+      - 6379:6379
+
+  maildev:
+    container_name: spring-thymeleaf-maildev
+    image: djfarrelly/maildev:1.0.0-rc2
+    ports:
+      - 9999:80
+      - 25
+
+volumes:
+  postgres_data:
+    driver: local

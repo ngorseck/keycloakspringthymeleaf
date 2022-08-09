@@ -1,0 +1,63 @@
+server:
+    port: 8089
+
+spring:
+    datasource:
+        password:
+        url: jdbc:mysql://localhost:3306/keycloak-thymeleaf-db?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+    application:
+        name: spring-keycloak-thymeleaf
+    liquibase:
+        change-log: classpath:/db/changelog/changelog-master.xml
+
+    #modification pour le caching
+    redis:
+        host: localhost
+        port: 6379
+        cache:
+            redis:
+                cache-null-values: false
+                time-to-live: 40000
+            type: redis
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,metrics,wavefront
+    info:
+        env:
+            enabled: true
+
+    endpoint:
+      health:
+        show-details: ALWAYS
+
+    health:
+        redis:
+          enabled: true #modification pour redis == false a true
+        probes:
+            enabled: true
+
+info:
+    application:
+        name: spring-logica-rh
+        version: '@project.version@'
+
+wavefront:
+    application:
+        name: spring-keycloak-thymeleaf
+
+logging:
+    level:
+        org:
+            springframework:
+                web: DEBUG
+
+keycloak:
+    realm: spring-thymeleaf-realm #nom du realm
+    auth-server-url: http://localhost:8080/
+    resource: spring-thymeleaf-app #nom du client
+    public-client: true
+    principal-attribute: name

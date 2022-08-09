@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li sec:authorize="hasRole('ROLE_USER')"><a href="/allemployees">Employees</a></li>
+                <li sec:authorize="hasRole('ROLE_USER')"><a href="/alldepartments">Depratment</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a class='dropdown-trigger' href='#' data-target='dropdown1'>
+                        <span sec:authentication="name">Ngor</span>
+                        <a href="/logout">Logout</a>
+                        <a href="/profile">Profile</a>
+                    </a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a href="/logout">Logout</a></li>
+                        <li><a href="#!">Profile</a></li>
+                    </ul>
+                </li>
+                <li sec:authorize="isAnonymous()"><a href="/sso/login">Login</a></li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="container">
+        <div layout:fragment="content">
+
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('.dropdown-trigger').dropdown();
+        });
+    </script>
+    <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+</body>
+</html>

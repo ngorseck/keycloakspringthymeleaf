@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="/accueil" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>departments</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Responsable</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="dept:${departments}">
+            <td th:text="${dept.name}"></td>
+            <td th:text="${dept.responsable.firstName + '  ' + dept.responsable.lastName}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
