@@ -33,6 +33,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions><!--  exclusion de la gestion des logs par defaut de spring boot   -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -68,10 +74,7 @@
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		<!--  caching   -->
-		<dependency>
-			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -83,11 +86,13 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--  pour les logs   -->
 		<dependency>
 			<groupId>io.zipkin.brave</groupId>
 			<artifactId>brave-context-log4j2</artifactId>
 			<version>5.13.7</version>
 		</dependency>
+		<!--  pour les logs   -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -103,6 +108,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--  layout thymeleaf   -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+		<!--  layout thymeleaf   -->
 		<!--  keycloak spring security -->
 		<!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-spring-boot-starter -->
 		<dependency>

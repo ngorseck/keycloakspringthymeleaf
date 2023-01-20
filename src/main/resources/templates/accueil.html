@@ -17,14 +17,16 @@
                 <li sec:authorize="hasRole('ROLE_USER')"><a href="/alldepartments">Depratment</a></li>
                 <li sec:authorize="isAuthenticated()">
                     <a class='dropdown-trigger' href='#' data-target='dropdown1'>
-                        <span sec:authentication="name">Ngor</span>
+                        <a href="/logout">
+                            <span sec:authentication="name">Ngor</span>
+                        </a>
                         <a href="/logout">Logout</a>
                         <a href="/profile">Profile</a>
                     </a>
-                    <ul id='dropdown1' class='dropdown-content'>
+                    <!--ul id='dropdown1' class='dropdown-content'>
                         <li><a href="/logout">Logout</a></li>
                         <li><a href="#!">Profile</a></li>
-                    </ul>
+                    </ul-->
                 </li>
                 <li sec:authorize="isAnonymous()"><a href="/sso/login">Login</a></li>
             </ul>

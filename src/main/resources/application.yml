@@ -61,3 +61,4 @@ keycloak:
     resource: spring-thymeleaf-app #nom du client
     public-client: true
     principal-attribute: name
+    #sources : https://www.baeldung.com/spring-boot-keycloak
